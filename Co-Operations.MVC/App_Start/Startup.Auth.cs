@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using Co_Operations.MVC.Models;
+using Co_Operations.Data;
 
 namespace Co_Operations.MVC
 {

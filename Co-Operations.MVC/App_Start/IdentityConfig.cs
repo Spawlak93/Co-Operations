@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Co_Operations.MVC.Models;
+using Co_Operations.Data;
 
 namespace Co_Operations.MVC
 {
