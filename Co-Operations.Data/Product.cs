@@ -10,11 +10,13 @@ namespace Co_Operations.Data
 {
     public class Product
     {
+        public Product() { }
         public Product(string itemName)
         {
             ItemName = itemName;
             ProductSKU = GenerateSKU();
         }
+
         [Key]
         public string ProductSKU { get; set; }
 

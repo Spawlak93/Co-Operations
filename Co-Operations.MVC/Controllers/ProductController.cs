@@ -1,4 +1,5 @@
 ﻿using Co_Operations.Models;
+using Co_Operations.Models.ProductModels;
 using Co_Operations.Services;
 using Microsoft.AspNet.Identity;
 using System;
@@ -9,9 +10,10 @@ using System.Web.Mvc;
 
 namespace Co_Operations.MVC.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
-
+        [AllowAnonymous]
         // GET: Product
         public ActionResult Index()
         {
@@ -47,13 +49,71 @@ namespace Co_Operations.MVC.Controllers
             return View(model);
         }
         //GET: Product/Detail
-        //public ActionResult Details(int id)
-        //{
-        //    var service = CreateProductService();
-        //    var model = service.GetProductByID(id);
+        public ActionResult Details(string id)
+        {
+            var service = CreateProductService();
+            var model = service.GetProductBySKU(id);
 
-        //    return model;
-        //}
+            return View(model);
+        }
+
+        //Get Product/Edit
+        public ActionResult Edit(string id)
+        {
+            var service = CreateProductService();
+            var detail = service.GetProductBySKU(id);
+            var model = new ProductEdit { ProductSKU = detail.ProductSKU, Description = detail.Description, ItemName = detail.ItemName, Price = detail.Price };
+            return View(model);
+        }
+
+        //Post Product/Edit
+        [HttpPost]
+        public ActionResult Edit(string id, ProductEdit model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            if (model.ProductSKU != id)
+            {
+                ModelState.AddModelError("", "SKU Mismatch");
+                return View(model);
+            }
+            var service = CreateProductService();
+
+            if (service.UpdateProduct(model))
+            {
+                TempData["SaveResult"] = "Your Product was updated";
+                return RedirectToAction("index");
+            }
+
+            ModelState.AddModelError("", "Product could not be updated");
+            return View(model);
+        }
+        //Get Product/Delete
+        [ActionName("Delete")]
+        public ActionResult Delete(string id)
+        {
+            var service = CreateProductService();
+            var model = service.GetProductBySKU(id);
+
+            return View(model);
+        }
+
+        //Post Product/Delete
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(string id)
+        {
+            var service = CreateProductService();
+
+            service.DeleteNote(id);
+
+            TempData["SaveResult"] = "Your Product was deleted";
+
+            return RedirectToAction("Index");
+        }
+
         private ProductService CreateProductService()
         {
             var userID = User.Identity.GetUserId();
