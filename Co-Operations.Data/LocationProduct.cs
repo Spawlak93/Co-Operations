@@ -11,12 +11,12 @@ namespace Co_Operations.Data
     public class LocationProduct
     {
         //To Be used in stretch goal of tracking stock
-        [Key]
+        [Key, Column(Order = 0)]
         [ForeignKey(nameof(Location))]
         public int LocationID { get; set; }
         public virtual Location Location { get; set; }
 
-        [Key]
+        [Key, Column(Order = 1)]
         [ForeignKey(nameof(Product))]
         public string ProductSKU { get; set; }
         public virtual Product Product { get; set; }

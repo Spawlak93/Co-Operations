@@ -54,11 +54,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LocationService.cs" />
+    <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Co-Operations.Data\Co-Operations.Data.csproj">
+      <Project>{CA1AFC78-01C6-4117-A7CC-56BC89F44F5B}</Project>
+      <Name>Co-Operations.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Co-Operations.Models\Co-Operations.Models.csproj">
+      <Project>{FE97DCBD-6B9A-4110-8FDF-952B5C22AA6F}</Project>
+      <Name>Co-Operations.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

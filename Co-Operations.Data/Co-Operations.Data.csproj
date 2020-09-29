@@ -55,11 +55,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IdentityModels.cs" />
+    <Compile Include="Location.cs" />
+    <Compile Include="LocationProduct.cs" />
+    <Compile Include="LocationUser.cs" />
+    <Compile Include="Migrations\202009281956104_InitialCreate.cs" />
+    <Compile Include="Migrations\202009281956104_InitialCreate.Designer.cs">
+      <DependentUpon>202009281956104_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009282108312_UpdatedProductClass.cs" />
+    <Compile Include="Migrations\202009282108312_UpdatedProductClass.Designer.cs">
+      <DependentUpon>202009282108312_UpdatedProductClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transaction.cs" />
+    <Compile Include="TransactionProduct.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202009281956104_InitialCreate.resx">
+      <DependentUpon>202009281956104_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009282108312_UpdatedProductClass.resx">
+      <DependentUpon>202009282108312_UpdatedProductClass.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

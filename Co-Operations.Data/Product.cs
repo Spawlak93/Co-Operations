@@ -22,7 +22,7 @@ namespace Co_Operations.Data
         public string ItemName { get; set; }
 
         [Required]
-        public string Details { get; set; }
+        public string Description { get; set; }
 
         [Required]
         public decimal Price { get; set; }
@@ -32,14 +32,14 @@ namespace Co_Operations.Data
 
         public virtual ApplicationUser Maker { get; set; }
 
-        public virtual IEnumerable<Transaction> Transactions { get; set; } = new List<Transaction>();
+        public virtual IEnumerable<TransactionProduct> Transactions { get; set; } = new List<TransactionProduct>();
 
 
         private string GenerateSKU()
         {
             Random random = new Random();
 
-            var sKU = random.Next(100000).ToString("D5");
+            var sKU = random.Next(1000).ToString("D3");
 
             return $"{ItemName.Substring(0, 3)}-{sKU}";
         }

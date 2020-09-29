@@ -10,12 +10,12 @@ namespace Co_Operations.Data
 {
     public class LocationUser
     {
-        [Key]
+        [Key, Column(Order = 0)]
         [ForeignKey(nameof(User))]
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
 
-        [Key]
+        [Key, Column(Order = 1)]
         [ForeignKey(nameof(Location))]
         public int LocationID { get; set; }
         public virtual Location Location { get; set; }

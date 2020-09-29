@@ -10,12 +10,12 @@ namespace Co_Operations.Data
 {
     public class TransactionProduct
     {
-        [Key]
+        [Key, Column(Order = 0)]
         [ForeignKey(nameof (Transaction))]
         public int TransactionId { get; set; }
         public virtual Transaction Transaction { get; set; }
 
-        [Key]
+        [Key, Column(Order = 1)]
         [ForeignKey(nameof(Product))]
         public string PruductSKU { get; set; }
         public virtual Product Product { get; set; }
