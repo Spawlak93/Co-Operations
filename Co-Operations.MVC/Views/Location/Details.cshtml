@@ -1,0 +1,66 @@
+﻿@model Co_Operations.Models.LocationModels.LocationDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LocationDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+        <hr />
+        <dt>
+            @Html.DisplayNameFor(model => model.LocationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocationName)
+        </dd>
+        <hr />
+        <dt>
+            @Html.DisplayNameFor(model => model.FundsOnHand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FundsOnHand)
+        </dd>
+        <hr />
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesCommision)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalesCommision)
+        </dd>
+        <hr />
+        <dt>
+            @Html.DisplayNameFor(model => model.LocationCommision)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocationCommision)
+        </dd>
+        <hr />
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesTax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalesTax)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

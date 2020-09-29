@@ -54,6 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LocationModels\LocationCreate.cs" />
+    <Compile Include="LocationModels\LocationDetail.cs" />
+    <Compile Include="LocationModels\LocationEdit.cs" />
+    <Compile Include="LocationModels\LocationListItem.cs" />
     <Compile Include="ProductModels\ProductCreate.cs" />
     <Compile Include="ProductModels\ProductDetail.cs" />
     <Compile Include="ProductModels\ProductEdit.cs" />

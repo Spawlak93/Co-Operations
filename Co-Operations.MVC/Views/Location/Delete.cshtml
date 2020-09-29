@@ -1,0 +1,64 @@
+﻿@model Co_Operations.Models.LocationModels.LocationDetail
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>LocationDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LocationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FundsOnHand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FundsOnHand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesCommision)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalesCommision)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocationCommision)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocationCommision)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesTax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalesTax)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

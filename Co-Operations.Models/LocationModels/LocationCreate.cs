@@ -5,25 +5,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Co_Operations.Data
+namespace Co_Operations.Models.LocationModels
 {
-    public class Location
+    public class LocationCreate
     {
-        [Key]
-        public int ID { get; set; }
         [Required]
+        [Display(Name = "Location Name")]
         public string LocationName { get; set; }
-        public decimal FundsOnHand { get; set; } = 0m;
+
         [Required]
+        [Range(0, 100)]
+        [Display(Name = "Sales Commision Percentage")]
         public double SalesCommisionPercent { get; set; }
+
         [Required]
+        [Range(0, 100)]
+
+        [Display(Name = "Location Sales Commision Percentage")]
         public double LocationCommisionPercent { get; set; }
+
         [Required]
+        [Range(0, 100)]
+        [Display(Name = "Sales Tax Percentage")]
         public double SalesTaxPercent { get; set; }
-
-        public virtual IEnumerable<LocationUser> LocationUsers { get; set; } = new List<LocationUser>();
-
-        //To Be used for stretch goal of tracking stock
-        //public virtual IEnumerable<LocationProduct> Stock { get; set; }
     }
 }

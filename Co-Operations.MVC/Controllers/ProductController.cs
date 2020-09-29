@@ -48,7 +48,7 @@ namespace Co_Operations.MVC.Controllers
 
             return View(model);
         }
-        //GET: Product/Detail
+        //GET: Product/Detail/{SKU}
         public ActionResult Details(string id)
         {
             var service = CreateProductService();
@@ -57,7 +57,7 @@ namespace Co_Operations.MVC.Controllers
             return View(model);
         }
 
-        //Get Product/Edit
+        //Get Product/Edit/{SKU}
         public ActionResult Edit(string id)
         {
             var service = CreateProductService();
@@ -66,7 +66,7 @@ namespace Co_Operations.MVC.Controllers
             return View(model);
         }
 
-        //Post Product/Edit
+        //Post Product/Edit/{SKU}
         [HttpPost]
         public ActionResult Edit(string id, ProductEdit model)
         {
@@ -89,7 +89,7 @@ namespace Co_Operations.MVC.Controllers
             ModelState.AddModelError("", "Product could not be updated");
             return View(model);
         }
-        //Get Product/Delete
+        //Get Product/Delete/{SKU}
         [ActionName("Delete")]
         public ActionResult Delete(string id)
         {
@@ -99,7 +99,7 @@ namespace Co_Operations.MVC.Controllers
             return View(model);
         }
 
-        //Post Product/Delete
+        //Post Product/Delete/{SKU}
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
