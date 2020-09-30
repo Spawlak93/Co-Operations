@@ -43,7 +43,7 @@ namespace Co_Operations.Data
 
             var sKU = random.Next(1000).ToString("D3");
 
-            return $"{ItemName.Substring(0, 3)}-{sKU}";
+            return $"{ItemName.Substring(0, 3).ToUpper()}-{sKU}";
         }
     }
 }

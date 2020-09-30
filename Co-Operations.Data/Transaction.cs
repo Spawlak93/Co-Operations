@@ -24,6 +24,16 @@ namespace Co_Operations.Data
         public int LocationID { get; set; }
         public virtual Location Location { get; set; }
 
+        public decimal TotalSaleAmount { get
+            {
+                decimal total = 0;
+                foreach (var tP in Products)
+                {
+                    total += (tP.Product.Price * tP.NumberSold);
+                }
+                return total;
+            } }
+
         public DateTimeOffset DateOfSale { get; set; }
     }
 }
