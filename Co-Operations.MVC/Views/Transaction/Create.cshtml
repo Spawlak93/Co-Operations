@@ -17,18 +17,33 @@
         <div class="form-group">
             @Html.LabelFor(model => model.LocationID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.LocationID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("LocationID",(IEnumerable<SelectListItem>)ViewBag.Locations,"Select Location", new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.LocationID, "", new { @class = "text-danger" })
             </div>
         </div>
         
-        <div id="CreateRows">
+        <table class="table">
+            <tr>
+                <th>Product SKU</th>
+                <th>Product Quantity</th>
+            </tr>
+
             @foreach (var item in Model.Products)
             {
-                Html.RenderPartial("TraProCreate", item);
 
+                <tr>
+                    <td>
+                        @Html.EditorFor(model => model.Products[Model.Products.IndexOf(item)].ProductSKU)
+                    </td>
+
+                    <td>
+                        @Html.EditorFor(model => model.Products[Model.Products.IndexOf(item)].Quantity)
+
+                    </td>
+                </tr>
             }
-        </div>
+
+        </table>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

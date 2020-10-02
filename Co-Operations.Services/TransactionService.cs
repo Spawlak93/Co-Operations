@@ -29,13 +29,67 @@ namespace Co_Operations.Services
                     ID = e.ID
                 };
                 item.SellerName = e.Seller.FullName;
-                item.TransactionTotal = e.TotalSaleAmount;
+                decimal total = 0;
+                if (e.Products != null)
+                    foreach (var product in e.Products)
+                    {
+                        total += product.Product.Price  * product.NumberSold;
+                    }
+                item.TransactionTotal = total;
                 return item;
             });
 
             return query;
         }
 
-        //public bool CrateTransaction
+        public bool CreateTransaction(TransactionCreate transaction)
+        {
+            var entity = new Transaction()
+            {
+                DateOfSale = DateTime.Now,
+                SellerID = _userID,
+                LocationID = transaction.LocationID
+            };
+
+            _context.Transactions.Add(entity);
+            _context.SaveChanges();
+            int transactionID = _context.Transactions.Single(t => t.DateOfSale == entity.DateOfSale && t.SellerID == entity.SellerID).ID;
+
+            foreach (var product in transaction.Products)
+            {
+                if (_context.Products.Where(e=> e.ProductSKU == product.ProductSKU).Count() == 1 && product.Quantity > 0)
+                {
+                    var productEntity = new TransactionProduct()
+                    {
+                        NumberSold = product.Quantity,
+                        PruductSKU = product.ProductSKU,
+                        TransactionId = transactionID
+                    };
+                    _context.TransactionProducts.Add(productEntity);
+                }
+            }
+
+            int test = _context.SaveChanges();
+            return true;
+        } 
+        
+        public TransactionDetail GetTransactionByID(int iD)
+        {
+            var entity = _context.Transactions.Single(e => e.ID == iD);
+            var model = new TransactionDetail() { ID = entity.ID, DateOfSale = entity.DateOfSale, LocationName = entity.Location.LocationName, SellerName = entity.Seller.FullName, Total = entity.TotalSaleAmount };
+
+            foreach(var eP in entity.Products)
+            {
+                model.Products.Add(new Models.TransactionProductModels.TransactionProductListItem()
+                {
+                    MakerName = eP.Product.Maker != null ? eP.Product.Maker.FullName : "N.A.",
+                    Price = eP.Product.Price,
+                    ProductSKU = eP.PruductSKU,
+                    Quantity = eP.NumberSold                   
+                });                
+            }
+
+            return model;
+        }
     }
 }

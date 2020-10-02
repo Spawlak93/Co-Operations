@@ -13,6 +13,6 @@ namespace Co_Operations.Models.TransactionModels
         [Display(Name = "Location")]
         public int LocationID { get; set; }
 
-        public List<TranssactionProductCreate> Products { get; set; }
+        public List<TranssactionProductCreate> Products { get; set; } = new List<TranssactionProductCreate>();
     }
 }

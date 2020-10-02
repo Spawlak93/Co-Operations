@@ -12,9 +12,7 @@ namespace Co_Operations.Data
     {
         [Key]
         public int ID { get; set; }
-
-
-        public virtual IEnumerable<TransactionProduct> Products { get; set; } = new List<TransactionProduct>();
+        public virtual ICollection<TransactionProduct> Products { get; set; } = new List<TransactionProduct>();
 
         [ForeignKey(nameof(Seller))]
         public string SellerID { get; set; }
