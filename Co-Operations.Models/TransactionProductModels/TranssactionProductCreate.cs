@@ -13,6 +13,7 @@ namespace Co_Operations.Models.TransactionProductModels
         public string ProductSKU { get; set; }
 
         [Display(Name ="Quantity of Item")]
+        [Range(0, Double.PositiveInfinity)]
         public int Quantity { get; set; }
     }
 }
