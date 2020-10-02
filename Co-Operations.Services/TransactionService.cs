@@ -30,10 +30,11 @@ namespace Co_Operations.Services
                 };
                 item.SellerName = e.Seller.FullName;
                 decimal total = 0;
-                foreach (var product in e.Products)
-                {
-                    total += product.NumberSold;
-                }
+                if (e.Products != null)
+                    foreach (var product in e.Products)
+                    {
+                        total += product.Product.Price  * product.NumberSold;
+                    }
                 item.TransactionTotal = total;
                 return item;
             });
@@ -70,8 +71,25 @@ namespace Co_Operations.Services
 
             int test = _context.SaveChanges();
             return true;
-        }
+        } 
+        
+        public TransactionDetail GetTransactionByID(int iD)
+        {
+            var entity = _context.Transactions.Single(e => e.ID == iD);
+            var model = new TransactionDetail() { ID = entity.ID, DateOfSale = entity.DateOfSale, LocationName = entity.Location.LocationName, SellerName = entity.Seller.FullName, Total = entity.TotalSaleAmount };
 
-         
+            foreach(var eP in entity.Products)
+            {
+                model.Products.Add(new Models.TransactionProductModels.TransactionProductListItem()
+                {
+                    MakerName = eP.Product.Maker != null ? eP.Product.Maker.FullName : "N.A.",
+                    Price = eP.Product.Price,
+                    ProductSKU = eP.PruductSKU,
+                    Quantity = eP.NumberSold                   
+                });                
+            }
+
+            return model;
+        }
     }
 }

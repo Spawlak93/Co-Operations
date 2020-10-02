@@ -21,7 +21,7 @@ namespace Co_Operations.Data
         [Required]
         public double SalesTaxPercent { get; set; }
 
-        public virtual IEnumerable<LocationUser> LocationUsers { get; set; } = new List<LocationUser>();
+        public virtual ICollection<LocationUser> LocationUsers { get; set; } = new List<LocationUser>();
 
         //To Be used for stretch goal of tracking stock
         //public virtual IEnumerable<LocationProduct> Stock { get; set; }

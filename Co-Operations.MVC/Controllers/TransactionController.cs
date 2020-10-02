@@ -57,6 +57,15 @@ namespace Co_Operations.MVC.Controllers
             return View(model);
 
         }
+
+        //Get Transaction/Detail/{ID}
+        public ActionResult Details(int ID)
+        {
+            var service = CreateTransactionService();
+            var model = service.GetTransactionByID(ID);
+
+            return View(model);
+        }
         private List<SelectListItem> PopulateLocationsList()
         {
             var service = new LocationService(User.Identity.GetUserId());

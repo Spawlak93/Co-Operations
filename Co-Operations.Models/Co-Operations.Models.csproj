@@ -66,6 +66,7 @@
     <Compile Include="TransactionModels\TransactionCreate.cs" />
     <Compile Include="TransactionModels\TransactionDetail.cs" />
     <Compile Include="TransactionModels\TransactionListItem.cs" />
+    <Compile Include="TransactionProductModels\TransactionProductListItem.cs" />
     <Compile Include="TransactionProductModels\TranssactionProductCreate.cs" />
   </ItemGroup>
   <ItemGroup>
