@@ -72,9 +72,9 @@ namespace Co_Operations.Services
             return true;
         } 
         
-        public TransactionDetail GetTransactionByID(int iD)
+        public TransactionDetail GetTransactionByID(int id)
         {
-            var entity = _context.Transactions.Single(e => e.ID == iD);
+            var entity = _context.Transactions.Single(e => e.ID == id);
             var model = new TransactionDetail() { ID = entity.ID, DateOfSale = entity.DateOfSale, LocationName = entity.Location.LocationName, SellerName = entity.Seller.FullName, Total = entity.TotalSaleAmount };
 
             foreach(var eP in entity.Products)
@@ -89,6 +89,15 @@ namespace Co_Operations.Services
             }
 
             return model;
+        }
+
+        public bool DeleteTransaction(int id)
+        {
+            var entity = _context.Transactions.Single(e => e.ID == id);
+
+            _context.Transactions.Remove(entity);
+
+            return _context.SaveChanges() == 1;
         }
     }
 }

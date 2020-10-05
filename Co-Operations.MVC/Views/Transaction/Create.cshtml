@@ -6,10 +6,10 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>TransactionCreate</h4>
         <hr />
@@ -17,33 +17,50 @@
         <div class="form-group">
             @Html.LabelFor(model => model.LocationID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("LocationID",(IEnumerable<SelectListItem>)ViewBag.Locations,"Select Location", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("LocationID", (IEnumerable<SelectListItem>)ViewBag.Locations, "Select Location", new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.LocationID, "", new { @class = "text-danger" })
             </div>
         </div>
-        
-        <table class="table">
-            <tr>
-                <th>Product SKU</th>
-                <th>Product Quantity</th>
-            </tr>
 
-            @foreach (var item in Model.Products)
-            {
+        <fieldset>
+            <legend>Add Products</legend>
+            <table id="submissionTable" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>Product SKU</td>
+                        <td>Quantity</td>
+                        <td></td>
+                    </tr>
+                </thead>
 
-                <tr>
+                <tr id="tablerow0">
                     <td>
-                        @Html.EditorFor(model => model.Products[Model.Products.IndexOf(item)].ProductSKU)
+                        <div class="editor-field">
+                            <input class="text-box single-line" name="ProductSKU[0]" type="text" value="" required="required" />
+                        </div>
                     </td>
-
                     <td>
-                        @Html.EditorFor(model => model.Products[Model.Products.IndexOf(item)].Quantity)
-
+                        <div class="editor-field">
+                            <input class="text-box single-line" name="Quantity[0]" type="number" value="" required="required" />
+                        </div>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary" onclick="removeTr(0);">Delete</button>
+                    </td>
+                    <td>
                     </td>
                 </tr>
-            }
 
-        </table>
+            </table>
+            <p>
+                <button id="add" class="btn btn-primary">Add</button>
+            </p>
+            <hr />
+
+            <p>
+                <input type="submit" value="Create" class="btn btn-default" />
+            </p>
+        </fieldset>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -56,3 +73,34 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        var counter = 1;
+        $(function () {
+
+            $('#add').click(function () {
+                $('<tr id="tablerow' + counter + '"><td>' +
+                    '<input type="text" class="text-box single-line" name="ProductSKU[' + counter + ']" value="" required="required" />' +
+                    '</td>' +
+                    '<td>' +
+                    '<input type="number" class="text-box single-line" name="Quantity[' + counter + ']" value="" required="required" />' +
+                    '</td>' +
+                    '<td>' +
+                    '<button type="button" class="btn btn-primary" onclick="removeTr(' + counter + ');">Delete</button>' +
+                    '</td>' +
+                    '</tr>').appendTo('#submissionTable');
+                counter++;
+                return false;
+            });
+        });
+        function removeTr(index) {
+            if (counter > 1) {
+                $('#tablerow' + index).remove();
+                counter--;
+            }
+            return false;
+        }
+    </script>
+    }

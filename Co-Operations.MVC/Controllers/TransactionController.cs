@@ -30,9 +30,6 @@ namespace Co_Operations.MVC.Controllers
             //Populate TransactionProductList
             var model = new TransactionCreate();
 
-            for(int i = 0; i < 5; i++)
-                model.Products.Add(new Co_Operations.Models.TransactionProductModels.TranssactionProductCreate());
-
             return View(model);
         }
 
@@ -41,6 +38,15 @@ namespace Co_Operations.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TransactionCreate model)
         {
+            for (int i = 0; i <= Request.Form.Count; i++)
+            {
+                var ProductSKU = Request.Form["ProductSKU[" + i + "]"];
+                var Quantitystring = Request.Form["Quantity[" + i + "]"];
+                if (!string.IsNullOrEmpty(ProductSKU) && int.TryParse(Quantitystring, out int Quantity))
+                    model.Products.Add(new Co_Operations.Models.TransactionProductModels.TranssactionProductCreate { ProductSKU = ProductSKU, Quantity = Quantity });
+
+            }
+
             if(!ModelState.IsValid)
             {
                 ViewBag.Locations = PopulateLocationsList();
@@ -61,13 +67,36 @@ namespace Co_Operations.MVC.Controllers
         }
 
         //Get Transaction/Detail/{ID}
-        public ActionResult Details(int ID)
+        public ActionResult Details(int id)
         {
             var service = CreateTransactionService();
-            var model = service.GetTransactionByID(ID);
+            var model = service.GetTransactionByID(id);
 
             return View(model);
         }
+        //Get Transaction/Delete/{ID}
+        public ActionResult Delete(int id)
+        {
+            var service = CreateTransactionService();
+            var model = service.GetTransactionByID(id);
+
+            return View(model);
+        }
+
+        //Post Transaction/Delete/{ID}
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteTransaction(int id)
+        {
+            var service = CreateTransactionService();
+
+            service.DeleteTransaction(id);
+            TempData["SaveResult"] = "The transaction was deleted";
+
+            return RedirectToAction("Index");
+        }
+
         private List<SelectListItem> PopulateLocationsList()
         {
             var service = new LocationService(User.Identity.GetUserId());
