@@ -53,7 +53,6 @@ namespace Co_Operations.Services
 
             _context.Transactions.Add(entity);
             _context.SaveChanges();
-            int transactionID = _context.Transactions.Single(t => t.DateOfSale == entity.DateOfSale && t.SellerID == entity.SellerID).ID;
 
             foreach (var product in transaction.Products)
             {
@@ -63,7 +62,7 @@ namespace Co_Operations.Services
                     {
                         NumberSold = product.Quantity,
                         PruductSKU = product.ProductSKU,
-                        TransactionId = transactionID
+                        TransactionId = entity.ID
                     };
                     _context.TransactionProducts.Add(productEntity);
                 }

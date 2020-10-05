@@ -29,8 +29,10 @@ namespace Co_Operations.MVC.Controllers
             ViewBag.Locations = PopulateLocationsList();
             //Populate TransactionProductList
             var model = new TransactionCreate();
+
             for(int i = 0; i < 5; i++)
                 model.Products.Add(new Co_Operations.Models.TransactionProductModels.TranssactionProductCreate());
+
             return View(model);
         }
 
