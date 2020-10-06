@@ -1,4 +1,5 @@
 ﻿using Co_Operations.Models.TransactionModels;
+using Co_Operations.Models.TransactionProductModels;
 using Co_Operations.Services;
 using Microsoft.AspNet.Identity;
 using System;
@@ -29,8 +30,7 @@ namespace Co_Operations.MVC.Controllers
             ViewBag.Locations = PopulateLocationsList();
             //Populate TransactionProductList
             var model = new TransactionCreate();
-            for(int i = 0; i < 5; i++)
-                model.Products.Add(new Co_Operations.Models.TransactionProductModels.TranssactionProductCreate());
+
             return View(model);
         }
 
@@ -39,13 +39,30 @@ namespace Co_Operations.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TransactionCreate model)
         {
-            if(!ModelState.IsValid)
+            for (int i = 0; i <= Request.Form.Count; i++)
+            {
+                var ProductSKU = Request.Form["ProductSKU[" + i + "]"];
+                var Quantitystring = Request.Form["Quantity[" + i + "]"];
+                if (!string.IsNullOrEmpty(ProductSKU) && int.TryParse(Quantitystring, out int Quantity))
+                {
+                    //If transaction already contains the product add to the quantity
+                    if (model.Products.Where(m => m.ProductSKU == ProductSKU).Count() == 1)
+                        model.Products.Single(m => m.ProductSKU == ProductSKU).Quantity += Quantity;
+
+                    //Else add new TransactionProduct model
+                    else
+                        model.Products.Add(new TranssactionProductCreate { ProductSKU = ProductSKU, Quantity = Quantity });
+                }
+
+            }
+
+            if (!ModelState.IsValid)
             {
                 ViewBag.Locations = PopulateLocationsList();
                 return View(model);
             }
             var service = CreateTransactionService();
-            
+
             if (service.CreateTransaction(model))
             {
                 ViewBag.SaveResult = "Transaction Added";
@@ -53,19 +70,93 @@ namespace Co_Operations.MVC.Controllers
             }
 
             ModelState.AddModelError("", "Transaction could not be Added");
-
+            ViewBag.Locations = PopulateLocationsList();
             return View(model);
 
         }
 
         //Get Transaction/Detail/{ID}
-        public ActionResult Details(int ID)
+        public ActionResult Details(int id)
         {
             var service = CreateTransactionService();
-            var model = service.GetTransactionByID(ID);
+            var model = service.GetTransactionByID(id);
 
             return View(model);
         }
+
+        //Get Transaction/Edit/{ID}
+        public ActionResult Edit(int id)
+        {
+            ViewBag.Locations = PopulateLocationsList();
+            var service = CreateTransactionService();
+            var model = service.GetTransactionEdit(id);
+            return View(model);
+        }
+
+        //Post Transaction/Edit/{ID}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, TransactionEdit model)
+        {
+            var service = CreateTransactionService();
+            for (int i = 0; i <= Request.Form.Count; i++)
+            {
+                var ProductSKU = Request.Form["ProductSKU[" + i + "]"];
+                var Quantitystring = Request.Form["Quantity[" + i + "]"];
+                if (!string.IsNullOrEmpty(ProductSKU) && int.TryParse(Quantitystring, out int Quantity))
+                {
+                    //If transaction already contains the product add it to the quantity
+                    if (model.Products.Where(m => m.ProductSKU == ProductSKU).Count() == 1)
+                        model.Products.Single(m => m.ProductSKU == ProductSKU).Quantity += Quantity;
+
+                    //Else add new TransactionProduct model
+                    else
+                        model.Products.Add(new TransactionProductEdit { ProductSKU = ProductSKU, Quantity = Quantity });
+                }
+
+            }
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Locations = PopulateLocationsList();
+                return View(model);
+            }
+
+            if (service.UpdateTransaction(model))
+            {
+                ViewBag.SaveResult = "Transaction updated";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Transaction could not be updated");
+            ViewBag.Locations = PopulateLocationsList();
+            return View(model);
+        }
+
+
+        //Get Transaction/Delete/{ID}
+        public ActionResult Delete(int id)
+        {
+            var service = CreateTransactionService();
+            var model = service.GetTransactionByID(id);
+
+            return View(model);
+        }
+
+        //Post Transaction/Delete/{ID}
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteTransaction(int id)
+        {
+            var service = CreateTransactionService();
+
+            service.DeleteTransaction(id);
+            TempData["SaveResult"] = "The transaction was deleted";
+
+            return RedirectToAction("Index");
+        }
+
         private List<SelectListItem> PopulateLocationsList()
         {
             var service = new LocationService(User.Identity.GetUserId());
