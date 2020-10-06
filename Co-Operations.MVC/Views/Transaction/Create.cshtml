@@ -33,21 +33,47 @@
                     </tr>
                 </thead>
 
-                <tr id="tablerow0">
-                    <td>
-                        <div class="editor-field">
-                            <input class="text-box single-line" name="ProductSKU[0]" type="text" value="" required="required" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="editor-field">
-                            <input class="text-box single-line" name="Quantity[0]" type="number" value="" required="required" />
-                        </div>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-primary" onclick="removeTr(0);">Delete</button>
-                    </td>
-                </tr>
+                @if (Model.Products.Count == 0)
+                {
+                    <tr id="tablerow0">
+                        <td>
+                            <div class="editor-field">
+                                <input class="text-box single-line" name="ProductSKU[0]" type="text" value="" required="required" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <input class="text-box single-line" name="Quantity[0]" type="number" value="" required="required" />
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" onclick="removeTr(0);">Delete</button>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var product in Model.Products)
+                    {
+                        <tr id=@("tablerow" + Model.Products.IndexOf(product))>
+                            <td>
+                                <div class="editor-field">
+                                    <input class="text-box single-line" name=@("ProductSKU[" + Model.Products.IndexOf(product) + "]") type="text"
+                                           value=@(product.ProductSKU) required="required" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="editor-field">
+                                    <input class="text-box single-line" name=@("Quantity[" + Model.Products.IndexOf(product) + "]") type="number"
+                                           value=@(product.Quantity) required="required" />
+                                </div>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary" onclick="removeTr(@Model.Products.IndexOf(product));">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                }
 
             </table>
             <p>
@@ -75,7 +101,7 @@
 
 @section Scripts {
     <script type="text/javascript">
-        var counter = 1;
+        var counter = @Model.Products.Count + 1;
         $(function () {
 
             $('#add').click(function () {
@@ -101,4 +127,4 @@
             return false;
         }
     </script>
-    }
+}

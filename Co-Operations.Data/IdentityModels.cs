@@ -40,6 +40,7 @@ namespace Co_Operations.Data
 
         public decimal FundsOwed => FundsEarned - FundsPayedOut;
 
+        public virtual ICollection<Transaction> Sales { get; set; } = new List<Transaction>();
         public virtual ICollection<Product> Products { get; set; } = new List<Product>();
         public virtual ICollection<LocationUser> Locations { get; set; } = new List<LocationUser>();
     }

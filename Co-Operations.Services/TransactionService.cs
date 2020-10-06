@@ -139,7 +139,7 @@ namespace Co_Operations.Services
 
                 else
                 {
-                    //If the product exists add it
+                    //If the product exists make new TransactionProductTable
                     if (_context.Products.Where(e => e.ProductSKU == product.ProductSKU).Count() == 1 && product.Quantity > 0)
                     {
                         var productEntity = new TransactionProduct()
