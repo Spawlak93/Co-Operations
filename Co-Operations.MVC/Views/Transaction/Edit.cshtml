@@ -1,19 +1,21 @@
-﻿@model Co_Operations.Models.TransactionModels.TransactionCreate
+﻿@model Co_Operations.Models.TransactionModels.TransactionEdit
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
 }
 
-<h2>Create</h2>
+<h2>Edit</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>TransactionCreate</h4>
+        <h4>TransactionEdit</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.TransactionID)
+
         <div class="form-group">
             @Html.LabelFor(model => model.LocationID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -23,7 +25,7 @@
         </div>
 
         <fieldset>
-            <legend>Add Products</legend>
+            <legend>Products</legend>
             <table id="submissionTable" class="table table-bordered">
                 <thead>
                     <tr>
@@ -33,38 +35,39 @@
                     </tr>
                 </thead>
 
-                <tr id="tablerow0">
-                    <td>
-                        <div class="editor-field">
-                            <input class="text-box single-line" name="ProductSKU[0]" type="text" value="" required="required" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="editor-field">
-                            <input class="text-box single-line" name="Quantity[0]" type="number" value="" required="required" />
-                        </div>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-primary" onclick="removeTr(0);">Delete</button>
-                    </td>
-                </tr>
-
+                @foreach (var product in Model.Products)
+                {
+                    <tr id=@("tablerow" + Model.Products.IndexOf(product))>
+                        <td>
+                            <div class="editor-field">
+                                <input class="text-box single-line" name=@("ProductSKU[" + Model.Products.IndexOf(product) + "]") type="text"
+                                       value=@(product.ProductSKU) required="required" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="editor-field">
+                                <input class="text-box single-line" name=@("Quantity[" + Model.Products.IndexOf(product) + "]") type="number"
+                                       value=@(product.Quantity) required="required" />
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" onclick="removeTr(@Model.Products.IndexOf(product));">Delete</button>
+                        </td>
+                    </tr>
+                }
             </table>
-            <p>
-                <button id="add" class="btn btn-primary">Add</button>
-            </p>
-            <hr />
 
             <p>
-                <input type="submit" value="Create" class="btn btn-default" />
+                <button id="add" class="btn btn-primary">Add Product</button>
             </p>
+
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
         </fieldset>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
     </div>
 }
 
@@ -75,7 +78,7 @@
 
 @section Scripts {
     <script type="text/javascript">
-        var counter = 1;
+        var counter = @Model.Products.Count;
         $(function () {
 
             $('#add').click(function () {
@@ -101,4 +104,4 @@
             return false;
         }
     </script>
-    }
+}

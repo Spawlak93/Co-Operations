@@ -18,7 +18,7 @@ namespace Co_Operations.Models.TransactionModels
 
         [Required]
         [Display(Name = "Products")]
-        public List<TransactionProductEdit> Products { get; set; }
+        public List<TransactionProductEdit> Products { get; set; } = new List<TransactionProductEdit>();
 
     }
 }
