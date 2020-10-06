@@ -1,0 +1,82 @@
+﻿@model Co_Operations.Models.TransactionModels.TransactionDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TransactionDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SellerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SellerName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocationName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfSale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfSale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Total)
+        </dd>
+    </dl>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().ProductSKU)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().MakerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Quantity)
+            </th>
+        </tr>
+        @foreach (var tP in Model.Products)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => tP.ProductSKU)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => tP.MakerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => tP.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => tP.Quantity)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

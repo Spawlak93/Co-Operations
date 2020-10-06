@@ -7,13 +7,18 @@ using System.Threading.Tasks;
 
 namespace Co_Operations.Models.TransactionProductModels
 {
-    public class TranssactionProductCreate
+    public class TransactionProductListItem
     {
-        [Display(Name = "Product SKU")]
+        [Display(Name ="Product SKU")]
         public string ProductSKU { get; set; }
 
-        [Display(Name ="Quantity of Item")]
-        [Range(1, Double.PositiveInfinity)]
+        [Display(Name ="Product Price")]
+        public decimal Price { get; set; }
+
+        [Display(Name ="Product Quantity")]
         public int Quantity { get; set; }
+
+        [Display(Name ="Maker Name")]
+        public string MakerName { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace Co_Operations.Data
 
         public virtual ApplicationUser Maker { get; set; }
 
-        public virtual IEnumerable<TransactionProduct> Transactions { get; set; } = new List<TransactionProduct>();
+        public virtual ICollection<TransactionProduct> Transactions { get; set; } = new List<TransactionProduct>();
 
 
         private string GenerateSKU()

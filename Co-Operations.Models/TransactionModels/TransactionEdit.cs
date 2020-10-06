@@ -8,11 +8,17 @@ using System.Threading.Tasks;
 
 namespace Co_Operations.Models.TransactionModels
 {
-    public class TransactionCreate
+    public class TransactionEdit
     {
+        public int TransactionID { get; set; }
+
+        [Required]
         [Display(Name = "Location")]
         public int LocationID { get; set; }
 
-        public List<TranssactionProductCreate> Products { get; set; } = new List<TranssactionProductCreate>();
+        [Required]
+        [Display(Name = "Products")]
+        public List<TransactionProductEdit> Products { get; set; } = new List<TransactionProductEdit>();
+
     }
 }

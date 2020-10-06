@@ -64,7 +64,11 @@
     <Compile Include="ProductModels\ProductListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransactionModels\TransactionCreate.cs" />
+    <Compile Include="TransactionModels\TransactionDetail.cs" />
+    <Compile Include="TransactionModels\TransactionEdit.cs" />
     <Compile Include="TransactionModels\TransactionListItem.cs" />
+    <Compile Include="TransactionProductModels\TransactionProductEdit.cs" />
+    <Compile Include="TransactionProductModels\TransactionProductListItem.cs" />
     <Compile Include="TransactionProductModels\TranssactionProductCreate.cs" />
   </ItemGroup>
   <ItemGroup>
