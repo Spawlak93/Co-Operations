@@ -27,9 +27,5 @@ namespace Co_Operations.Models.LocationModels
         [Required]
         [Display(Name = "Sales Tax Percentage")]
         public double SalesTaxPercent { get; set; }
-
-        [Required]
-        [Display(Name = "Funds On Hand")]
-        public decimal FundsOnHand { get; set; }
     }
 }

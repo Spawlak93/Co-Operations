@@ -19,5 +19,7 @@ namespace Co_Operations.Models.ProductModels
         public decimal Price { get; set; }
         [Display(Name ="Maker")]
         public string MakerName { get; set; }
+
+        public List<ProductTransactionListItem> Transactions { get; set; } = new List<ProductTransactionListItem>();
     }
 }

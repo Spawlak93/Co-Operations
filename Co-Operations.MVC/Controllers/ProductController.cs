@@ -51,6 +51,8 @@ namespace Co_Operations.MVC.Controllers
         //GET: Product/Detail/{SKU}
         public ActionResult Details(string id)
         {
+            if (id is null)
+                return View();
             var service = CreateProductService();
             var model = service.GetProductBySKU(id);
 
