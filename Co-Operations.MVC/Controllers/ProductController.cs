@@ -52,7 +52,7 @@ namespace Co_Operations.MVC.Controllers
         public ActionResult Details(string id)
         {
             if (id is null)
-                return View();
+                return RedirectToAction("Index");
             var service = CreateProductService();
             var model = service.GetProductBySKU(id);
 

@@ -57,8 +57,35 @@
         <dd>
             @Html.DisplayFor(model => model.SalesTax)
         </dd>
-
     </dl>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Transactions.FirstOrDefault().TransactionID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transactions.FirstOrDefault().TransactionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transactions.FirstOrDefault().TransactionTotal)
+            </th>
+        </tr>
+
+        @foreach (var tP in Model.Transactions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => tP.TransactionID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => tP.TransactionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => tP.TransactionTotal)
+                </td>
+            </tr>
+        }
+    </table>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
