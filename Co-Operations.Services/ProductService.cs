@@ -45,7 +45,7 @@ namespace Co_Operations.Services
         public ProductDetail GetProductBySKU(string SKU)
         {
             var entity = _context.Products.Single(e => e.ProductSKU == SKU);
-            return new ProductDetail
+            var detail = new ProductDetail
             {
                 ProductSKU = entity.ProductSKU,
                 ItemName = entity.ItemName,
@@ -53,6 +53,18 @@ namespace Co_Operations.Services
                 Description = entity.Description,
                 MakerName = entity.Maker != null ? entity.Maker.FullName : "NA"
             };
+
+            foreach(var transaction in entity.Transactions)
+            {
+                detail.Transactions.Add(new ProductTransactionListItem()
+                {
+                    LocationName = transaction.Transaction.Location.LocationName,
+                    Quantity = transaction.NumberSold,
+                    TransactionNumber = transaction.TransactionId
+                });
+            }
+
+            return detail;
         }
 
         public bool UpdateProduct(ProductEdit model)

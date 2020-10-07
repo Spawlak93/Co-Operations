@@ -68,7 +68,7 @@ namespace Co_Operations.MVC.Controllers
         {
             var service = CreateLocationService();
             var detail = service.GetLocationByID(id);
-            var model = new LocationEdit { ID = detail.ID, FundsOnHand = detail.FundsOnHand, LocationCommisionPercent = detail.LocationCommision, LocationName = detail.LocationName, SalesCommisionPercent = detail.SalesCommision, SalesTaxPercent = detail.SalesTax };
+            var model = new LocationEdit { ID = detail.ID, LocationCommisionPercent = detail.LocationCommision, LocationName = detail.LocationName, SalesCommisionPercent = detail.SalesCommision, SalesTaxPercent = detail.SalesTax };
             return View(model);
         }
 

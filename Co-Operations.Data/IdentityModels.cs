@@ -34,7 +34,25 @@ namespace Co_Operations.Data
         [Required]
         public DateTime DOB { get; set; }
 
-        public decimal FundsEarned { get; set; } = 0;
+        public decimal FundsEarned
+        {
+            get
+            {
+                decimal total = 0;
+                foreach (var product in Products)
+                {
+                    foreach (var t in product.Transactions)
+                    {
+                        total += t.NumberSold * (decimal)t.Transaction.Location.MakerCommisionPercent * product.Price;
+                    }                    
+                }
+                foreach(var transaction in Sales)
+                {
+                    total += transaction.TotalSaleAmount * (decimal)transaction.Location.SalesCommisionPercent;
+                }
+                return total;
+            }
+        }
 
         public decimal FundsPayedOut { get; set; } = 0;
 
@@ -59,7 +77,7 @@ namespace Co_Operations.Data
 
         public DbSet<Location> Locations { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Transaction> Transactions {get;set;}
+        public DbSet<Transaction> Transactions { get; set; }
         public DbSet<LocationUser> LocationUsers { get; set; }
         public DbSet<TransactionProduct> TransactionProducts { get; set; }
 

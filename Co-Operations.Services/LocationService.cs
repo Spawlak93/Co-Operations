@@ -57,7 +57,6 @@ namespace Co_Operations.Services
         public bool UpdateLaction(LocationEdit model)
         {
             var entity = _context.Locations.Single(e => e.ID == model.ID);
-            entity.FundsOnHand = model.FundsOnHand;
             entity.LocationCommisionPercent = model.LocationCommisionPercent;
             entity.LocationName = model.LocationName;
             entity.SalesCommisionPercent = model.SalesCommisionPercent;

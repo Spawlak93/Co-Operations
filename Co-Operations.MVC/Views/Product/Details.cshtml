@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>ProductDetail</h4>
+    <h4>Product Info</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -49,10 +49,38 @@
         <dd>
             @Html.DisplayFor(model => model.MakerName)
         </dd>
-
     </dl>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Transactions.FirstOrDefault().TransactionNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transactions.FirstOrDefault().LocationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Transactions.FirstOrDefault().Quantity)
+            </th>
+        </tr>
+        @foreach (var tP in Model.Transactions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => tP.TransactionNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => tP.LocationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => tP.Quantity)
+                </td>
+            </tr>
+        }
+    </table>
+
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductSKU }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
