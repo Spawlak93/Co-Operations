@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Co_Operations.Models.AccountModels
 {
-    public class ProfileProduct
+    public class ProfileProductListItem
     {
         [Display(Name = "Product SKU")]
         public string ProductSKU { get; set; }

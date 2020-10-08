@@ -24,6 +24,8 @@ namespace Co_Operations.Models.AccountModels
         [Display(Name = "Funds Owed")]
         public decimal FundsOwed { get; set; }
 
-        
+        public List<ProfileProductListItem> Products { get; set; } = new List<ProfileProductListItem>();
+
+        public List<ProfileSalesListItem> Sales { get; set; } = new List<ProfileSalesListItem>();
     }
 }

@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace Co_Operations.Models.AccountModels
 {
-    class ProfileTransactionListItem
+    public class ProfileSalesListItem
     {
+        public int TransactionNumber { get; set; }
+
+        public DateTimeOffset DateOfSale { get; set; }
+
+        public decimal SaleAmount { get; set; }
+
+        public decimal CommisionAmount { get; set; }
     }
 }
