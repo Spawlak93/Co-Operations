@@ -43,7 +43,7 @@ namespace Co_Operations.Services
         public LocationDetail GetLocationByID(int ID)
         {
             var entity = _context.Locations.Single(e => e.ID == ID);
-            return new LocationDetail
+            var detail = new LocationDetail
             {
                 ID = entity.ID,
                 FundsOnHand = entity.FundsOnHand,
@@ -52,6 +52,17 @@ namespace Co_Operations.Services
                 SalesTax = entity.SalesTaxPercent * 100,
                 LocationName = entity.LocationName
             };
+            foreach (var transaction in entity.Transactions)
+            {
+                detail.Transactions.Add(new LocationTransactionListItem()
+                {
+                    TransactionID = transaction.ID,
+                    TransactionDate = transaction.DateOfSale,
+                    TransactionTotal = transaction.TotalSaleAmount
+                });
+            }
+
+            return detail;
         }
 
         public bool UpdateLaction(LocationEdit model)

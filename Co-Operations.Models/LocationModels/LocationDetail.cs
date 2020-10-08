@@ -26,5 +26,7 @@ namespace Co_Operations.Models.LocationModels
 
         [Display(Name = "Sales Tax Percentage")]
         public double SalesTax { get; set; }
+
+        public List<LocationTransactionListItem> Transactions { get; set; } = new List<LocationTransactionListItem>();
     }
 }
