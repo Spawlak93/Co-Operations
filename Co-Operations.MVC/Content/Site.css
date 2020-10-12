@@ -35,3 +35,6 @@ textarea {
     padding-right: 0;
 }
 
+tr.tableData:hover {
+    background-color:lightgrey;
+}

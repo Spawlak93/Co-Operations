@@ -13,6 +13,7 @@ namespace Co_Operations.Models.AccountModels
         public decimal AmountOwed { get; set; } 
 
         [Display(Name = "Amount Being Collected")]
+        [Range(0,double.PositiveInfinity)]
         public decimal AmountBeingCollected { get; set; }
 
         [Display(Name = "Date of Collection")]

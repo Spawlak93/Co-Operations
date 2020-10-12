@@ -91,7 +91,7 @@
             </tr>
             @foreach (var product in Model.Products)
             {
-                <tr>
+                <tr class="tableData">
                     <td>
                         @product.ProductSKU
                     </td>
@@ -132,7 +132,7 @@
 
             @foreach (var sale in Model.Sales)
             {
-                <tr>
+                <tr class="tableData">
                     <td>
                         @sale.TransactionNumber
                     </td>
