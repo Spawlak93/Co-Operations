@@ -21,11 +21,16 @@ namespace Co_Operations.Services
 
         public IEnumerable<ProductListItem> GetProducts()
         {
-            return _context.Products.Select(e => new ProductListItem
+            return _context.Products.ToList().Select(e =>
             {
-                ItemName = e.ItemName,
-                SKU = e.ProductSKU,
-                Price = e.Price
+                var item = new ProductListItem
+                {
+                    ItemName = e.ItemName,
+                    SKU = e.ProductSKU,
+                    Price = e.Price.ToString("c"),
+                    MakerId = e.MakerID
+                };
+                return item;
             }).ToList();
         }
 
@@ -45,14 +50,41 @@ namespace Co_Operations.Services
         public ProductDetail GetProductBySKU(string SKU)
         {
             var entity = _context.Products.Single(e => e.ProductSKU == SKU);
-            return new ProductDetail
+            var detail = new ProductDetail
+            {
+                ProductSKU = entity.ProductSKU,
+                ItemName = entity.ItemName,
+                Price = entity.Price.ToString("c"),
+                Description = entity.Description,
+                MakerName = entity.Maker != null ? entity.Maker.FullName : "NA"
+            };
+
+            foreach(var transaction in entity.Transactions)
+            {
+                detail.Transactions.Add(new ProductTransactionListItem()
+                {
+                    LocationName = transaction.Transaction.Location.LocationName,
+                    Quantity = transaction.NumberSold,
+                    TransactionNumber = transaction.TransactionId
+                });
+            }
+
+            return detail;
+        }
+
+        public ProductEdit GetProductEditBySKU(string SKU)
+        {
+            var entity = _context.Products.Single(e => e.ProductSKU == SKU);
+            var edit = new ProductEdit
             {
                 ProductSKU = entity.ProductSKU,
                 ItemName = entity.ItemName,
                 Price = entity.Price,
                 Description = entity.Description,
-                MakerName = entity.Maker != null ? entity.Maker.FullName : "NA"
+                MakerID = entity.MakerID
             };
+
+            return edit;
         }
 
         public bool UpdateProduct(ProductEdit model)

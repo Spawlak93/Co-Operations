@@ -43,25 +43,49 @@ namespace Co_Operations.Services
         public LocationDetail GetLocationByID(int ID)
         {
             var entity = _context.Locations.Single(e => e.ID == ID);
-            return new LocationDetail
+            var detail = new LocationDetail
             {
                 ID = entity.ID,
-                FundsOnHand = entity.FundsOnHand,
-                LocationCommision = entity.LocationCommisionPercent * 100,
-                SalesCommision = entity.SalesCommisionPercent * 100,
-                SalesTax = entity.SalesTaxPercent * 100,
+                FundsOnHand = entity.FundsOnHand.ToString("c"),
+                LocationCommision = entity.LocationCommisionPercent.ToString("p"),
+                SalesCommision = entity.SalesCommisionPercent.ToString("p"),
+                SalesTax = entity.SalesTaxPercent.ToString("p"),
                 LocationName = entity.LocationName
             };
+            foreach (var transaction in entity.Transactions)
+            {
+                detail.Transactions.Add(new LocationTransactionListItem()
+                {
+                    TransactionID = transaction.ID,
+                    TransactionDate = transaction.DateOfSale,
+                    TransactionTotal = transaction.TotalSaleAmount.ToString("c")
+                });
+            }
+
+            return detail;
+        }
+
+        public LocationEdit GetLocationEditbyID(int ID)
+        {
+            var entity = _context.Locations.Single(e => e.ID == ID);
+            var edit = new LocationEdit
+            {
+                ID = entity.ID,
+                LocationName = entity.LocationName,
+                LocationCommisionPercent = entity.LocationCommisionPercent * 100,
+                SalesCommisionPercent = entity.SalesCommisionPercent * 100,
+                SalesTaxPercent = entity.SalesTaxPercent * 100
+            };
+            return edit;
         }
 
         public bool UpdateLaction(LocationEdit model)
         {
             var entity = _context.Locations.Single(e => e.ID == model.ID);
-            entity.FundsOnHand = model.FundsOnHand;
-            entity.LocationCommisionPercent = model.LocationCommisionPercent;
             entity.LocationName = model.LocationName;
-            entity.SalesCommisionPercent = model.SalesCommisionPercent;
-            entity.SalesTaxPercent = model.SalesTaxPercent;
+            entity.LocationCommisionPercent = model.LocationCommisionPercent / 100;
+            entity.SalesCommisionPercent = model.SalesCommisionPercent / 100;
+            entity.SalesTaxPercent = model.SalesTaxPercent / 100;
 
             return _context.SaveChanges() == 1;
         }

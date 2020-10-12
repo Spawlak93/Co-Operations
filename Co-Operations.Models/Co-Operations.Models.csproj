@@ -54,10 +54,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountModels\AccountProfile.cs" />
+    <Compile Include="AccountModels\CollectCommisionDetail.cs" />
+    <Compile Include="AccountModels\ProfileProductListItem.cs" />
+    <Compile Include="AccountModels\ProfileSalesListItem.cs" />
     <Compile Include="LocationModels\LocationCreate.cs" />
     <Compile Include="LocationModels\LocationDetail.cs" />
     <Compile Include="LocationModels\LocationEdit.cs" />
     <Compile Include="LocationModels\LocationListItem.cs" />
+    <Compile Include="LocationModels\LocationTransactionListItem.cs" />
+    <Compile Include="ProductModels\ProductTransactionListItem.cs" />
     <Compile Include="ProductModels\ProductCreate.cs" />
     <Compile Include="ProductModels\ProductDetail.cs" />
     <Compile Include="ProductModels\ProductEdit.cs" />

@@ -19,9 +19,11 @@ namespace Co_Operations.Models.TransactionModels
         public string LocationName { get; set; }
 
         [Display(Name ="Transaction Total")]
-        public decimal TransactionTotal { get; set; }
+        public string TransactionTotal { get; set; }
 
         [Display(Name ="Date of transaction")]
         public DateTimeOffset DateOfSale { get; set; }
+
+        public string SellerID { get; set; }
     }
 }

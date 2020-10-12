@@ -16,15 +16,17 @@ namespace Co_Operations.Models.LocationModels
         public string LocationName { get; set; }
         
         [Display(Name = "Funds on Hand")]
-        public decimal FundsOnHand { get; set; }
+        public string FundsOnHand { get; set; }
 
         [Display(Name = "Sales Commision Percentage")]
-        public double SalesCommision { get; set; }
+        public string SalesCommision { get; set; }
 
         [Display(Name = "Location Commision Percentage")]
-        public double LocationCommision { get; set; }
+        public string LocationCommision { get; set; }
 
         [Display(Name = "Sales Tax Percentage")]
-        public double SalesTax { get; set; }
+        public string SalesTax { get; set; }
+
+        public List<LocationTransactionListItem> Transactions { get; set; } = new List<LocationTransactionListItem>();
     }
 }

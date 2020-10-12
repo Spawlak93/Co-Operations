@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<Co_Operations.Models.ProductListItem>
 
+@using Microsoft.AspNet.Identity
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Products";
 }
 
-<h2>Products</h2>
-
+<h2 class="text-center">Products</h2>
 @if (TempData.ContainsKey("SaveResult"))
 {
     <div class="alert alert-success fade in" role="alert">
@@ -19,38 +20,103 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.SKU)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ItemName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th></th>
-    </tr>
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#AllProducts">All Products</a></li>
+    <li><a data-toggle="tab" href="#MyProducts">My Products</a></li>
+</ul>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SKU)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.SKU }) |
-                @Html.ActionLink("Details", "Details", new { id = item.SKU }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.SKU })
-            </td>
-        </tr>
-    }
+<div class="tab-content">
+    <div id="AllProducts" class="tab-pane fade in active">
 
-</table>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.SKU)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ItemName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SKU)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ItemName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    @if (item.MakerId == User.Identity.GetUserId())
+                    {
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.SKU }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.SKU }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.SKU })
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.SKU })
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+
+    <div id="MyProducts" class="tab-pane fade">
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.SKU)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ItemName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.Where(m=> m.MakerId == User.Identity.GetUserId()))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SKU)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ItemName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    @if (item.MakerId == User.Identity.GetUserId())
+                    {
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.SKU }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.SKU }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.SKU })
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.SKU })
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+</div>

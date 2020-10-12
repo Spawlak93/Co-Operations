@@ -26,7 +26,8 @@ namespace Co_Operations.Services
                 {
                     LocationName = e.Location.LocationName,
                     DateOfSale = e.DateOfSale,
-                    ID = e.ID
+                    ID = e.ID,
+                    SellerID = e.SellerID
                 };
                 item.SellerName = e.Seller.FullName;
                 decimal total = 0;
@@ -35,7 +36,7 @@ namespace Co_Operations.Services
                     {
                         total += product.Product.Price  * product.NumberSold;
                     }
-                item.TransactionTotal = total;
+                item.TransactionTotal = total.ToString("c");
                 return item;
             });
 
@@ -75,14 +76,14 @@ namespace Co_Operations.Services
         public TransactionDetail GetTransactionByID(int id)
         {
             var entity = _context.Transactions.Single(e => e.ID == id);
-            var model = new TransactionDetail() { ID = entity.ID, DateOfSale = entity.DateOfSale, LocationName = entity.Location.LocationName, SellerName = entity.Seller.FullName, Total = entity.TotalSaleAmount };
+            var model = new TransactionDetail() { ID = entity.ID, DateOfSale = entity.DateOfSale, LocationName = entity.Location.LocationName, SellerName = entity.Seller.FullName, Total = entity.TotalSaleAmount.ToString("c") };
 
             foreach(var eP in entity.Products)
             {
                 model.Products.Add(new Models.TransactionProductModels.TransactionProductListItem()
                 {
                     MakerName = eP.Product.Maker != null ? eP.Product.Maker.FullName : "N.A.",
-                    Price = eP.Product.Price,
+                    Price = eP.Product.Price.ToString("c"),
                     ProductSKU = eP.PruductSKU,
                     Quantity = eP.NumberSold                   
                 });                

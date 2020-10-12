@@ -9,6 +9,7 @@ namespace Co_Operations.Models.ProductModels
 {
     public class ProductEdit
     {
+        public string MakerID { get; set; }
         public string ProductSKU { get; set; }
         [Required]
         [Display(Name = "Item Name")]
