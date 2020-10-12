@@ -44,7 +44,7 @@
 
             @foreach (var item in Model)
             {
-                <tr>
+                <tr class="tableData">
                     <td>
                         @Html.DisplayFor(modelItem => item.SKU)
                     </td>
@@ -91,7 +91,7 @@
 
             @foreach (var item in Model.Where(m=> m.MakerId == User.Identity.GetUserId()))
             {
-                <tr>
+                <tr class="tableData">
                     <td>
                         @Html.DisplayFor(modelItem => item.SKU)
                     </td>
