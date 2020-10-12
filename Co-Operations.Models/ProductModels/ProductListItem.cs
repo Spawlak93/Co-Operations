@@ -16,6 +16,8 @@ namespace Co_Operations.Models
         public string ItemName { get; set; }
 
         [Display(Name = "Price")]
-        public Decimal Price { get; set; }
+        public string Price { get; set; }
+
+        public string MakerId { get; set; }
     }
 }

@@ -20,5 +20,8 @@ namespace Co_Operations.Models.AccountModels
 
         [Display(Name = "Number Sold")]
         public int NumerSold { get; set; }
+
+        [Display(Name = "Commisions Earned")]
+        public string CommisionsEarned {get; set;}
     }
 }

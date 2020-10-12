@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollectedCommission.cs" />
     <Compile Include="IdentityModels.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="LocationProduct.cs" />
@@ -73,6 +74,10 @@
     <Compile Include="Migrations\202010061536031_ReworkingFunds.cs" />
     <Compile Include="Migrations\202010061536031_ReworkingFunds.Designer.cs">
       <DependentUpon>202010061536031_ReworkingFunds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202010120751121_AddedCollectedCommissionsClass.cs" />
+    <Compile Include="Migrations\202010120751121_AddedCollectedCommissionsClass.Designer.cs">
+      <DependentUpon>202010120751121_AddedCollectedCommissionsClass.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Product.cs" />
@@ -96,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202010061536031_ReworkingFunds.resx">
       <DependentUpon>202010061536031_ReworkingFunds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202010120751121_AddedCollectedCommissionsClass.resx">
+      <DependentUpon>202010120751121_AddedCollectedCommissionsClass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

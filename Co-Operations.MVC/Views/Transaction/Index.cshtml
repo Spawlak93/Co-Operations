@@ -1,10 +1,12 @@
 ﻿@model IEnumerable<Co_Operations.Models.TransactionModels.TransactionListItem>
 
+@using Microsoft.AspNet.Identity
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Transactions";
 }
 
-<h2>Index</h2>
+<h2 class="text-center">Transactions</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -26,26 +28,36 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SellerName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LocationName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TransactionTotal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateOfSale)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SellerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfSale)
+            </td>
+            @if (item.SellerID == User.Identity.GetUserId())
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                </td>
+            }
+        </tr>
+    }
 
 </table>

@@ -16,9 +16,10 @@ namespace Co_Operations.Models.ProductModels
         [Display(Name = "Description")]
         public string Description { get; set; }
         [Display(Name = "Price")]
-        public decimal Price { get; set; }
+        public string Price { get; set; }
         [Display(Name ="Maker")]
         public string MakerName { get; set; }
+
 
         public List<ProductTransactionListItem> Transactions { get; set; } = new List<ProductTransactionListItem>();
     }

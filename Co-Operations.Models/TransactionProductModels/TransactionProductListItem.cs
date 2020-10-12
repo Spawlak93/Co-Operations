@@ -13,7 +13,7 @@ namespace Co_Operations.Models.TransactionProductModels
         public string ProductSKU { get; set; }
 
         [Display(Name ="Product Price")]
-        public decimal Price { get; set; }
+        public string Price { get; set; }
 
         [Display(Name ="Product Quantity")]
         public int Quantity { get; set; }

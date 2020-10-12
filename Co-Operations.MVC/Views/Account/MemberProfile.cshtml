@@ -1,0 +1,163 @@
+﻿@model Co_Operations.Models.AccountModels.AccountProfile
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+<h2 class="text-center">Info</h2>
+<hr />
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#AccountInfo">Account</a></li>
+    <li><a data-toggle="tab" href="#Products">Products</a></li>
+    <li><a data-toggle="tab" href="#Transactions">Transactions</a></li>
+</ul>
+<br />
+<div class="tab-content">
+
+    <div id="AccountInfo" class="tab-pane fade in active">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DOB)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DOB)
+            </dd>
+
+            <dt>Password</dt>
+
+            <dd>@Html.ActionLink("Change Password", "ChangePassword", "Manage")</dd>
+        </dl>
+        <hr />
+
+        <dl class="dl-horizontal">
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FundsEarned)
+            </dt>
+
+            <dd>
+                @Model.FundsEarned.ToString("c")
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FundsPayedOut)
+            </dt>
+
+            <dd>
+                @Model.FundsPayedOut.ToString("c")
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FundsOwed)
+            </dt>
+
+            <dd>
+                @Model.FundsOwed.ToString("c")
+            </dd>
+
+            <dt></dt>
+            <dd><a class="btn btn-default" href="Collect">Collect Commisions</a></dd>
+
+        </dl>
+    </div>
+
+    <div id="Products" class="tab-pane fade">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.FirstOrDefault().ProductSKU)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.FirstOrDefault().ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.FirstOrDefault().Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.FirstOrDefault().NumerSold)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.FirstOrDefault().CommisionsEarned)
+                </th>
+            </tr>
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>
+                        @product.ProductSKU
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.ProductName)
+                    </td>
+                    <td>
+                        @product.Price.ToString("c")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.NumerSold)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => product.CommisionsEarned)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <div id="Transactions" class="tab-pane fade">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sales.FirstOrDefault().TransactionNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sales.FirstOrDefault().DateOfSale)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sales.FirstOrDefault().SaleAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sales.FirstOrDefault().CommisionAmount)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var sale in Model.Sales)
+            {
+                <tr>
+                    <td>
+                        @sale.TransactionNumber
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => sale.DateOfSale)
+                    </td>
+                    <td>
+                        @sale.SaleAmount.ToString("c")
+                    </td>
+                    <td>
+                        @sale.CommisionAmount.ToString("c")
+                    </td>
+                </tr>
+
+            }
+            <tr>
+                <td></td>
+                <td>Total:</td>
+                <td>
+                    @Model.TotalSaleAmount
+                </td>
+                <td>
+                    @Model.TotalCommisionAmount
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

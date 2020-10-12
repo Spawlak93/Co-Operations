@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Co_Operations.MVC.Models;
 using Co_Operations.Data;
+using Co_Operations.Services;
+using Co_Operations.Models.AccountModels;
 
 namespace Co_Operations.MVC.Controllers
 {
@@ -402,6 +404,56 @@ namespace Co_Operations.MVC.Controllers
         public ActionResult ExternalLoginFailure()
         {
             return View();
+        }
+
+        // Get /Account/Profile
+        [HttpGet]
+        //[ActionName("Profile")]
+        public ActionResult MemberProfile()
+        {
+            var service = CreateAccountService();
+            var model = service.GetProfile();
+            return View(model);
+        }
+
+        //Get/Account/Collect
+        [HttpGet]
+        public ActionResult Collect()
+        {
+            var service = CreateAccountService();
+            var model = service.GetCollectCommision();
+            return View(model);
+        }
+
+        //POST Account/Collect
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Collect(CollectCommisionDetail model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            if (model.AmountBeingCollected > model.AmountOwed)
+            {
+                ModelState.AddModelError("", "Cannot collect more than owed");
+                return View(model);
+            }
+
+            var service = CreateAccountService();
+            if (service.PostCollectCommision(model))
+            {
+                ViewBag.SaveResult = "Commissions Collected";
+                return RedirectToAction("MemberProfile");
+            }
+            ModelState.AddModelError("", "Error Storing Collected Amount");
+            return View(model);
+        }
+
+        private AccountService CreateAccountService()
+        {
+            var userID = User.Identity.GetUserId();
+            var service = new AccountService(userID);
+            return service;
         }
 
         protected override void Dispose(bool disposing)

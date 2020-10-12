@@ -22,7 +22,7 @@ namespace Co_Operations.Models.TransactionModels
         public DateTimeOffset DateOfSale { get; set; }
 
         [Display (Name ="Transaction Total")]
-        public decimal Total { get; set; }
+        public string Total { get; set; }
 
         public List<TransactionProductModels.TransactionProductListItem> Products { get; set; } = new List<TransactionProductModels.TransactionProductListItem>();
     }

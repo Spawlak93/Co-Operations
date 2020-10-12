@@ -63,8 +63,7 @@ namespace Co_Operations.MVC.Controllers
         public ActionResult Edit(string id)
         {
             var service = CreateProductService();
-            var detail = service.GetProductBySKU(id);
-            var model = new ProductEdit { ProductSKU = detail.ProductSKU, Description = detail.Description, ItemName = detail.ItemName, Price = detail.Price };
+            var model = service.GetProductEditBySKU(id);
             return View(model);
         }
 
@@ -78,6 +77,12 @@ namespace Co_Operations.MVC.Controllers
             if (model.ProductSKU != id)
             {
                 ModelState.AddModelError("", "SKU Mismatch");
+                return View(model);
+            }
+
+            if (model.MakerID != User.Identity.GetUserId())
+            {
+                ModelState.AddModelError("", "You cannot edit other peoples products.");
                 return View(model);
             }
             var service = CreateProductService();

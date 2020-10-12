@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountModels\AccountProfile.cs" />
+    <Compile Include="AccountModels\CollectCommisionDetail.cs" />
     <Compile Include="AccountModels\ProfileProductListItem.cs" />
     <Compile Include="AccountModels\ProfileSalesListItem.cs" />
     <Compile Include="LocationModels\LocationCreate.cs" />

@@ -37,9 +37,9 @@ namespace Co_Operations.MVC.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            if (model.LocationCommisionPercent + model.SalesCommisionPercent + model.SalesTaxPercent >= 100)
+            if (model.LocationCommisionPercent + model.SalesCommisionPercent>= 100)
             {
-                ModelState.AddModelError("", "Combined total of taxes and commisions must be lower than 100%");
+                ModelState.AddModelError("", "Combined total of commisions must be lower than 100%");
                 return View(model);
             }
 
@@ -67,8 +67,7 @@ namespace Co_Operations.MVC.Controllers
         public ActionResult Edit(int id)
         {
             var service = CreateLocationService();
-            var detail = service.GetLocationByID(id);
-            var model = new LocationEdit { ID = detail.ID, LocationCommisionPercent = detail.LocationCommision, LocationName = detail.LocationName, SalesCommisionPercent = detail.SalesCommision, SalesTaxPercent = detail.SalesTax };
+            var model = service.GetLocationEditbyID(id);
             return View(model);
         }
 
@@ -85,9 +84,9 @@ namespace Co_Operations.MVC.Controllers
                 ModelState.AddModelError("", "ID mismatch");
             }
 
-            if (model.LocationCommisionPercent + model.SalesCommisionPercent + model.SalesTaxPercent >= 100)
+            if (model.LocationCommisionPercent + model.SalesCommisionPercent>= 100)
             {
-                ModelState.AddModelError("", "Combined total of taxes and commisions must be lower than 100%");
+                ModelState.AddModelError("", "Combined total of commisions must be lower than 100%");
                 return View(model);
             }
 

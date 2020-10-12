@@ -15,17 +15,43 @@ namespace Co_Operations.Models.AccountModels
         [Display(Name = "Date of Birth")]
         public DateTime DOB { get; set; }
 
-        [Display(Name = "Funds Earned")]
+        [Display(Name = "Commisions Earned")]
         public decimal FundsEarned { get; set; }
 
-        [Display(Name = "Funds Payed Out")]
+        [Display(Name = "Commisions Payed Out")]
         public decimal FundsPayedOut { get; set; }
 
-        [Display(Name = "Funds Owed")]
+        [Display(Name = "Comisions Owed")]
         public decimal FundsOwed { get; set; }
+
+        public string TotalSaleAmount
+        {
+            get
+            {
+                decimal total = 0;
+                foreach (var sale in Sales)
+                {
+                    total += sale.SaleAmount;
+                }
+                return string.Format("{0:C}", total);
+            }
+        }
+        public string TotalCommisionAmount
+        {
+            get
+            {
+                decimal total = 0;
+                foreach (var sale in Sales)
+                {
+                    total += sale.CommisionAmount;
+                }
+                return string.Format("{0:C}", total);
+            }
+        }
 
         public List<ProfileProductListItem> Products { get; set; } = new List<ProfileProductListItem>();
 
         public List<ProfileSalesListItem> Sales { get; set; } = new List<ProfileSalesListItem>();
     }
 }
+

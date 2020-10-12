@@ -16,6 +16,6 @@ namespace Co_Operations.Models.LocationModels
         public DateTimeOffset TransactionDate { get; set; }
 
         [Display(Name = "Transaction Total")]
-        public decimal TransactionTotal { get; set; }
+        public string TransactionTotal { get; set; }
     }
 }

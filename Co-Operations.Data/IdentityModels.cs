@@ -44,9 +44,9 @@ namespace Co_Operations.Data
                     foreach (var t in product.Transactions)
                     {
                         total += t.NumberSold * (decimal)t.Transaction.Location.MakerCommisionPercent * product.Price;
-                    }                    
+                    }
                 }
-                foreach(var transaction in Sales)
+                foreach (var transaction in Sales)
                 {
                     total += transaction.TotalSaleAmount * (decimal)transaction.Location.SalesCommisionPercent;
                 }
@@ -54,12 +54,22 @@ namespace Co_Operations.Data
             }
         }
 
-        public decimal FundsPayedOut { get; set; } = 0;
+        public decimal FundsPayedOut
+        {
+            get
+            {
+                decimal total = 0;
+                foreach (var collect in Collected)
+                    total += collect.AmountCollected;
+                return total;
+            }
+        }
 
         public decimal FundsOwed => FundsEarned - FundsPayedOut;
 
         public virtual ICollection<Transaction> Sales { get; set; } = new List<Transaction>();
         public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+        public virtual ICollection<CollectedCommission> Collected { get; set; } = new List<CollectedCommission>();
         public virtual ICollection<LocationUser> Locations { get; set; } = new List<LocationUser>();
     }
 
@@ -75,6 +85,7 @@ namespace Co_Operations.Data
             return new ApplicationDbContext();
         }
 
+        public DbSet<CollectedCommission> CollectedCommissions { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
