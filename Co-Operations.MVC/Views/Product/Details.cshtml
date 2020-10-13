@@ -65,7 +65,7 @@
         </tr>
         @foreach (var tP in Model.Transactions)
         {
-            <tr class="tableData">
+            <tr class="tableData" data-href="/Transaction/Details/@tP.TransactionNumber">
                 <td>
                     @Html.DisplayFor(modelItem => tP.TransactionNumber)
                 </td>
@@ -84,3 +84,18 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.ProductSKU }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            const rows = document.querySelectorAll('tr[data-href]');
+            console.log(rows)
+            rows.forEach(row => {
+                row.addEventListener("click", function () {
+                    window.location.href = row.dataset.href;
+                });
+            });
+        });
+    </script>
+}

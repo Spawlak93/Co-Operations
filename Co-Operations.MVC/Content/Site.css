@@ -1,6 +1,9 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-image: url('Assets/Wood Seamless Texture .jpg');
+    background-attachment: fixed;
+    background-color: saddlebrown;
 }
 
     body .Jumbotron {
@@ -10,8 +13,10 @@
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
+    padding-top: 50px;
     padding-left: 15px;
     padding-right: 15px;
+    padding-bottom: 25px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -28,13 +33,53 @@ textarea {
     max-width: 280px;
 }
 
-
-#HomeTrans {
-    background-image: linear-gradient(darkgrey, White);
-    padding-left: 0;
-    padding-right: 0;
+footer {
+    background-color: rgba(74, 74, 74, .7);
+    color: white;
+    padding: 1rem;
+    position:absolute;
+    position: fixed;
+    bottom:0;
+    width: 100%;
 }
 
+
+#HomeTrans {
+    background: transparent;
+}
+
+.body-content {
+    background-image: linear-gradient(white, Grey);
+    min-height:  100vh;
+}
+
+.navbar {
+
+}
+
+.nav-tabs{
+    border-bottom: 1px solid black;
+}
+
+.nav-tabs  li.active  a {
+    background-color: inherit;
+    border-bottom-color: inherit;
+}
+.btn-outline{
+    color: black;
+    background: transparent;
+    border: 1px solid black;
+}
+
+    .btn-outline:hover {
+        background-color: rgba(125, 124, 76, .2);
+    }
+
+
+table 
+{
+    background-color: rgba(33, 31, 31, 0.05);
+}
 tr.tableData:hover {
-    background-color:lightgrey;
+    background-color: rgba(22, 22, 22, .1);
 }

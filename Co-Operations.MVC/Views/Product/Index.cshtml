@@ -44,9 +44,9 @@
 
             @foreach (var item in Model)
             {
-                <tr class="tableData">
+                <tr class="tableData" data-href="/product/Details/@item.SKU">
                     <td>
-                        @Html.DisplayFor(modelItem => item.SKU)
+                        @item.SKU
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ItemName)
@@ -89,11 +89,11 @@
                 <th></th>
             </tr>
 
-            @foreach (var item in Model.Where(m=> m.MakerId == User.Identity.GetUserId()))
+            @foreach (var item in Model.Where(m => m.MakerId == User.Identity.GetUserId()))
             {
-                <tr class="tableData">
+                <tr class="tableData" data-href="/product/Details/@item.SKU">
                     <td>
-                        @Html.DisplayFor(modelItem => item.SKU)
+                        @item.SKU
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ItemName)
@@ -101,22 +101,28 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
-                    @if (item.MakerId == User.Identity.GetUserId())
-                    {
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.SKU }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.SKU }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.SKU })
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            @Html.ActionLink("Details", "Details", new { id = item.SKU })
-                        </td>
-                    }
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.SKU }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.SKU }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.SKU })
+                    </td>
                 </tr>
             }
         </table>
     </div>
 </div>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            const rows = document.querySelectorAll('tr[data-href]');
+            console.log(rows)
+            rows.forEach(row => {
+                row.addEventListener("click", function() {
+                    window.location.href = row.dataset.href;
+                });
+            });
+        });
+    </script>
+}

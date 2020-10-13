@@ -13,7 +13,6 @@ namespace Co_Operations.MVC.Controllers
     [Authorize]
     public class TransactionController : Controller
     {
-        [AllowAnonymous]
         // GET: Transaction
         public ActionResult Index()
         {
