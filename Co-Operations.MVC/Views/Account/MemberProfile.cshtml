@@ -9,7 +9,7 @@
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#AccountInfo">Account</a></li>
     <li><a data-toggle="tab" href="#Products">Products</a></li>
-    <li><a data-toggle="tab" href="#Transactions">Transactions</a></li>
+    <li><a data-toggle="tab" href="#Transactions">Sales</a></li>
 </ul>
 <br />
 <div class="tab-content">
@@ -29,7 +29,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.DOB)
+                @Model.DOB.ToString("M/d/yyyy")
             </dd>
 
             <dt>Password</dt>
