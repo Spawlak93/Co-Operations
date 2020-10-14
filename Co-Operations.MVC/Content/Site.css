@@ -1,15 +1,13 @@
 ﻿body {
     padding-top: 0;
     padding-bottom: 0;
-    background-image: url('Assets/Wood Seamless Texture .jpg');
+    /*    background-image: url('Assets/Wood Seamless Texture .jpg');*/
+    background-image: url('Assets/Granite Seamless Texture 3621.jpg');
+    /*    background-image: url('Assets/Marble Seamless Texture 2956.jpg');*/
     background-attachment: fixed;
-    background-color: saddlebrown;
+    /*    background-color: saddlebrown;*/
+    background-color: grey;
 }
-
-    body .Jumbotron {
-        padding-top: 0px;
-        padding-bottom: 0px;
-    }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -37,35 +35,68 @@ footer {
     background-color: rgba(74, 74, 74, .7);
     color: white;
     padding: 1rem;
-    position:absolute;
-    position: fixed;
-    bottom:0;
+    bottom: 0;
+    float: initial;
     width: 100%;
+}
+
+h2 {
+    text-align: center;
 }
 
 
 #HomeTrans {
-    background: transparent;
+    margin-top: 2em;
+    border: 1px solid rgb(128, 128, 128);
+    background-color: rgba(0, 0, 0, 0.1);
+    background-size: cover;
 }
 
 .body-content {
-    background-image: linear-gradient(white, Grey);
-    min-height:  100vh;
+    /*    background-image: linear-gradient(white, Grey);*/
+    background-image: url('Assets/Paper Seamless.jpg');
+    background-color: antiquewhite;
+    min-height: 95vh;
+    padding-bottom: 50px;
 }
+
 
 .navbar {
-
 }
 
-.nav-tabs{
+.nav-tabs {
     border-bottom: 1px solid black;
 }
 
-.nav-tabs  li.active  a {
-    background-color: inherit;
-    border-bottom-color: inherit;
-}
-.btn-outline{
+    .nav-tabs li a {
+        color: grey;
+        border: 1px solid lightgrey;
+        border-bottom-color: transparent;
+    }
+
+        .nav-tabs li a:hover {
+            color: black;
+            background-color: rgba(255, 255, 255, 0.10);
+            border: 1px double grey;
+        }
+
+    .nav-tabs li.active a {
+        color: darkslategrey !important;
+        background-color: rgba(255, 255, 255, 0.20) !important;
+        border: 1px double grey !important;
+        border-bottom-color: inherit;
+    }
+
+        .nav-tabs li.active a:hover {
+            background-color: rgba(255, 255, 255, 0.10);
+            border: 1px double grey;
+        }
+
+        .nav-tabs li.active a:visited {
+            background-color: rgba(255, 255, 255, 0.20);
+        }
+
+.btn-outline {
     color: black;
     background: transparent;
     border: 1px solid black;
@@ -76,10 +107,36 @@ footer {
     }
 
 
-table 
-{
+table {
     background-color: rgba(33, 31, 31, 0.05);
 }
+
 tr.tableData:hover {
     background-color: rgba(22, 22, 22, .1);
+}
+
+
+
+
+@media (min-width: 768px) {
+    .dl-horizontal dt {
+        float: left;
+        width: 48%;
+        clear: left;
+        text-align: right;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .dl-horizontal dd {
+        margin-left: 52%;
+        text-align: left;
+    }
+}
+
+@media (max-width: 768px) {
+    .body-content {
+        overflow: scroll;
+    }
 }

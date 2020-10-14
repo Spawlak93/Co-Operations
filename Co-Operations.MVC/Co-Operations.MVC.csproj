@@ -183,8 +183,12 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Assets\Marble Seamless Texture .jpg" />
-    <Content Include="Content\Assets\Wood Seamless Texture 2.jpg" />
+    <Content Include="Content\Assets\Granite Seamless Texture 3621.jpg" />
+    <Content Include="Content\Assets\Marble Seamless Texture 2951.jpg" />
+    <Content Include="Content\Assets\Marble Seamless Texture 2956.jpg" />
+    <Content Include="Content\Assets\Marble Seamless Texture 3039.jpg" />
+    <Content Include="Content\Assets\Pen.jpg" />
+    <Content Include="Content\Assets\Paper Seamless.jpg" />
     <Content Include="Content\Assets\Wood Seamless Texture .jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />

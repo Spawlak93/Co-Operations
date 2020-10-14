@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 class="text-center">Transaction Details</h2>
 
 <div>
-    <h4>Transaction Detail</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -59,7 +58,7 @@
         </tr>
         @foreach (var tP in Model.Products)
         {
-            <tr class="tableData">
+            <tr class="tableData" data-href="/Product/Details/@tP.ProductSKU">
                 <td>
                     @Html.DisplayFor(modelItem => tP.ProductSKU)
                 </td>
@@ -78,5 +77,20 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@section Scripts{
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            const rows = document.querySelectorAll('tr[data-href]');
+            console.log(rows)
+            rows.forEach(row => {
+                row.addEventListener("click", function () {
+                    window.location.href = row.dataset.href;
+                });
+            });
+        });
+    </script>
+}

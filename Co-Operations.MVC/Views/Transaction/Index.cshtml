@@ -5,130 +5,144 @@
 @{
     ViewBag.Title = "Transactions";
 }
+<div class="wide-page">
 
-<h2 class="text-center">Transactions</h2>
+    <h2 class="text-center">Transactions</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-@if (TempData.ContainsKey("SaveResult"))
-{
-    <div class="alert alert-success fade in" role="alert">
+    @if (TempData.ContainsKey("SaveResult"))
+    {
+        <div class="alert alert-success fade in" role="alert">
 
-        <button type="button" class="close" data-dismiss="alert">
-            <span>&times;</span>
-        </button>
-        @TempData["SaveResult"]
-    </div>
-}
-<ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#AllTransactions">All Transactions</a></li>
-    <li><a data-toggle="tab" href="#MySales">My Sales</a></li>
-</ul>
-<div class="tab-content">
-    <div id="AllTransactions" class="tab-pane fade in active">
+            <button type="button" class="close" data-dismiss="alert">
+                <span>&times;</span>
+            </button>
+            @TempData["SaveResult"]
+        </div>
+    }
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#AllTransactions">All Transactions</a></li>
+        <li><a data-toggle="tab" href="#MySales">My Sales</a></li>
+        <li><a href="/Transaction/Create">New Transaction</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="AllTransactions" class="tab-pane fade in active">
 
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.SellerName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LocationName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TransactionTotal)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DateOfSale)
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr class="tableData">
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SellerName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LocationName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TransactionTotal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateOfSale)
-                    </td>
-                    @if (item.SellerID == User.Identity.GetUserId())
-                    {
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            @Html.ActionLink("Details", "Details", new { id = item.ID })
-                        </td>
-                    }
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LocationName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TransactionTotal)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateOfSale)
+                    </th>
+                    <th></th>
                 </tr>
-            }
 
-        </table>
-    </div>
-    <div id="MySales" class="tab-pane fade">
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.SellerName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LocationName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TransactionTotal)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DateOfSale)
-                </th>
-                <th></th>
-            </tr>
+                @foreach (var item in Model)
+                {
+                    <tr class="tableData" data-href="/Transaction/Details/@item.ID">
+                        <td>
+                            @Html.DisplayFor(modelitem => item.ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TransactionTotal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateOfSale)
+                        </td>
+                        @if (item.SellerID == User.Identity.GetUserId())
+                        {
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @Html.ActionLink("Details", "Details", new { id = item.ID })
+                            </td>
+                        }
+                    </tr>
+                }
 
-            @foreach (var item in Model.Where(m => m.SellerID == User.Identity.GetUserId()))
-            {
-                <tr class="tableData">
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SellerName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LocationName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TransactionTotal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateOfSale)
-                    </td>
-                    @if (item.SellerID == User.Identity.GetUserId())
-                    {
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            @Html.ActionLink("Details", "Details", new { id = item.ID })
-                        </td>
-                    }
+            </table>
+        </div>
+        <div id="MySales" class="tab-pane fade">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LocationName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TransactionTotal)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateOfSale)
+                    </th>
+                    <th></th>
                 </tr>
-            }
 
-        </table>
+                @foreach (var item in Model.Where(m => m.SellerID == User.Identity.GetUserId()))
+                {
+                    <tr class="tableData" data-href="/Transaction/Details/@item.ID">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TransactionTotal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateOfSale)
+                        </td>
+                        @if (item.SellerID == User.Identity.GetUserId())
+                        {
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @Html.ActionLink("Details", "Details", new { id = item.ID })
+                            </td>
+                        }
+                    </tr>
+                }
+
+            </table>
+        </div>
     </div>
 </div>
+
+@section Scripts{
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            const rows = document.querySelectorAll('tr[data-href]');
+            console.log(rows)
+            rows.forEach(row => {
+                row.addEventListener("click", function () {
+                    window.location.href = row.dataset.href;
+                });
+            });
+        });
+    </script>
+}

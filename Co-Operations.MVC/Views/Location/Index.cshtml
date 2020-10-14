@@ -6,9 +6,8 @@
 
 <h2 class="text-center">Locations</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
+
 @if (TempData.ContainsKey("SaveResult"))
 {
     <div class="alert alert-success fade in" role="alert">
@@ -32,7 +31,7 @@
 
     @foreach (var item in Model)
     {
-        <tr class="tableData">
+        <tr class="tableData" data-href="location/Details/@item.ID">
             <td>
                 @Html.DisplayFor(model => item.ID)
             </td>
@@ -48,3 +47,19 @@
     }
 
 </table>
+<p class="text-center"><a class="btn btn-default" href="Location/Create">Add Location</a></p>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            const rows = document.querySelectorAll('tr[data-href]');
+            console.log(rows)
+            rows.forEach(row => {
+                row.addEventListener("click", function () {
+                    window.location.href = row.dataset.href;
+                });
+            });
+        });
+    </script>
+}

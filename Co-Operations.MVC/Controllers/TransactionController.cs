@@ -24,7 +24,6 @@ namespace Co_Operations.MVC.Controllers
         //Get: Transaction/Create
         public ActionResult Create()
         {
-            TempData["SaveResult"] = "TransactionCreated.";
             //Populate Viewbag
             ViewBag.Locations = PopulateLocationsList();
             //Populate TransactionProductList
@@ -64,7 +63,7 @@ namespace Co_Operations.MVC.Controllers
 
             if (service.CreateTransaction(model))
             {
-                ViewBag.SaveResult = "Transaction Added";
+                TempData["SaveResult"] = "Transaction Created.";
                 return RedirectToAction("Index");
             }
 
@@ -123,7 +122,7 @@ namespace Co_Operations.MVC.Controllers
 
             if (service.UpdateTransaction(model))
             {
-                ViewBag.SaveResult = "Transaction updated";
+                TempData["SaveResult"] = "Transaction Updated.";
                 return RedirectToAction("Index");
             }
 

@@ -76,7 +76,7 @@ namespace Co_Operations.Services
         {
             var entity = _context.Products.Single(e => e.ProductSKU == SKU);
             var edit = new ProductEdit
-            {
+            {                
                 ProductSKU = entity.ProductSKU,
                 ItemName = entity.ItemName,
                 Price = entity.Price,

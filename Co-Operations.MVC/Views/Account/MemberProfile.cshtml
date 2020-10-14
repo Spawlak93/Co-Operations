@@ -63,11 +63,10 @@
             <dd>
                 @Model.FundsOwed.ToString("c")
             </dd>
-
-            <dt></dt>
-            <dd><a class="btn btn-default" href="Collect">Collect Commisions</a></dd>
-
         </dl>
+        <div class="text-center">
+            <a class="btn btn-default" href="Collect">Collect Commisions</a>
+        </div>
     </div>
 
     <div id="Products" class="tab-pane fade">
@@ -91,7 +90,7 @@
             </tr>
             @foreach (var product in Model.Products)
             {
-                <tr class="tableData">
+                <tr class="tableData" data-href="/Product/Details/@product.ProductSKU">
                     <td>
                         @product.ProductSKU
                     </td>
@@ -132,7 +131,7 @@
 
             @foreach (var sale in Model.Sales)
             {
-                <tr class="tableData">
+                <tr class="tableData" data-href="/Transaction/Details/@sale.TransactionNumber">
                     <td>
                         @sale.TransactionNumber
                     </td>
@@ -161,3 +160,17 @@
         </table>
     </div>
 </div>
+
+@section Scripts{
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            const rows = document.querySelectorAll('tr[data-href]');
+            console.log(rows)
+            rows.forEach(row => {
+                row.addEventListener("click", function () {
+                    window.location.href = row.dataset.href;
+                });
+            });
+        });
+    </script>
+}
