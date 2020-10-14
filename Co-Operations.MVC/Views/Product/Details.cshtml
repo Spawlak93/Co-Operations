@@ -4,12 +4,11 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2 class="text-center">Product Information</h2>
 
 <div>
-    <h4>Product Info</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal text-center">
         <dt>
             @Html.DisplayNameFor(model => model.ProductSKU)
         </dt>
@@ -65,7 +64,7 @@
         </tr>
         @foreach (var tP in Model.Transactions)
         {
-            <tr class="tableData">
+            <tr class="tableData" data-href="/Transaction/Details/@tP.TransactionNumber">
                 <td>
                     @Html.DisplayFor(modelItem => tP.TransactionNumber)
                 </td>
@@ -82,5 +81,21 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ProductSKU }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.ProductSKU }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            const rows = document.querySelectorAll('tr[data-href]');
+            console.log(rows)
+            rows.forEach(row => {
+                row.addEventListener("click", function () {
+                    window.location.href = row.dataset.href;
+                });
+            });
+        });
+    </script>
+}

@@ -25,7 +25,6 @@ namespace Co_Operations.MVC.Controllers
         //Get: Product/Create
         public ActionResult Create()
         {
-            TempData["SaveResult"] = "Product Added.";
             return View();
         }
         //Post: Product/Create
@@ -40,7 +39,7 @@ namespace Co_Operations.MVC.Controllers
 
             if(service.CreateProduct(model))
             {
-                ViewBag.SaveResult = "Product Added";
+                TempData["SaveResult"] = "Product Added.";
                 return RedirectToAction("Index");
             }
 
@@ -85,6 +84,7 @@ namespace Co_Operations.MVC.Controllers
                 ModelState.AddModelError("", "You cannot edit other peoples products.");
                 return View(model);
             }
+
             var service = CreateProductService();
 
             if (service.UpdateProduct(model))

@@ -1,20 +1,21 @@
 ﻿@model Co_Operations.Models.ProductModels.ProductEdit
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Product";
 }
 
-<h2>Edit</h2>
+<h2>Edit Product</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Product Edit</h4>
+        <br />
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ProductSKU)
+        @Html.HiddenFor(model => model.MakerID)
 
         <div class="form-group">
             @Html.LabelFor(model => model.ItemName, htmlAttributes: new { @class = "control-label col-md-2" })

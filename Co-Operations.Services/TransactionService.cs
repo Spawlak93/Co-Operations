@@ -31,11 +31,13 @@ namespace Co_Operations.Services
                 };
                 item.SellerName = e.Seller.FullName;
                 decimal total = 0;
+
                 if (e.Products != null)
                     foreach (var product in e.Products)
                     {
                         total += product.Product.Price  * product.NumberSold;
                     }
+
                 item.TransactionTotal = total.ToString("c");
                 return item;
             });

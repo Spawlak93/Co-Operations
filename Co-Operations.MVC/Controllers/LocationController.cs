@@ -24,8 +24,7 @@ namespace Co_Operations.MVC.Controllers
         //Get: Location/Create
         public ActionResult Create()
         {
-            TempData["SaveResult"] = "Location Added";
-            //Putting in default percantages
+            //Putting in default percantages as examples
             return View(new LocationCreate() { LocationCommisionPercent = 20, SalesCommisionPercent = 10 });
         }
 
@@ -46,7 +45,7 @@ namespace Co_Operations.MVC.Controllers
             var service = CreateLocationService();
             if (service.CreateLocation(model))
             {
-                ViewBag.SaveResult = "Location Added";
+                TempData["SaveResult"] = "Location Added";
                 return RedirectToAction("Index");
             }
 

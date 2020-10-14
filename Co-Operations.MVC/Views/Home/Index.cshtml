@@ -2,22 +2,25 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron" id="HomeTrans">
-    <h1 class="text-center">Logging a transaction?</h1>
-    <p class="text-center"><a href="/Transaction/Create" class="btn btn-primary btn-lg">Add Transaction</a></p>
-</div>
+<div class="content-container">
 
-<div class="row">
-    <div class="col-md-6">
-        <h2>Getting started</h2>
-        <p>
-            First time using Co-Operations? Read this quick start guide!
-        </p>
-        <p><a class="btn btn-default" href="/Home/About">Learn more &raquo;</a></p>
+    <div class="jumbotron" id="HomeTrans">
+        <h1 class="text-center" style="font-family: 'Dancing Script', cursive;">Logging a transaction?</h1>
+        <p class="text-center"><a href="/Transaction/Create" class="btn btn-outline btn-lg">Add Transaction</a></p>
     </div>
-    <div class="col-md-6">
-        <h2>Your Profile</h2>
-        <p>See All of your products and sales as well as track your commissions here.</p>
-        <p><a class="btn btn-default" href="Account/MemberProfile">View Profile</a></p>
+
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <h2>Getting started</h2>
+            <p>
+                First time using Co-Operations? Read this quick start guide!
+            </p>
+            <p><a class="btn btn-outline" href="/Home/About">Learn more</a></p>
+        </div>
+        <div class="col-md-6 text-center">
+            <h2>Your Profile</h2>
+            <p>See your products and sales as well as track your commissions here.</p>
+            <p><a class="btn btn-outline" href="Account/MemberProfile">View Profile</a></p>
+        </div>
     </div>
 </div>
